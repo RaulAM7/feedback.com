@@ -34,9 +34,8 @@ class UserDashboardController extends AbstractController
     #[Route('/user/updateToData', name: 'app_user_update', methods: ['POST', 'PUT'])]
     public function updateData(Request $request): Response
     {
-        return $this->redirect('app_user_dashboard');
         $user = $this->getUser();
-
+        return $this->render('home/debugger.html.twig');
         if (!$user instanceof User) {
             throw $this->createNotFoundException('User not found');
         }

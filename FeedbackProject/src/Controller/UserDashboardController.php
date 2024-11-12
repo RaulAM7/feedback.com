@@ -31,24 +31,25 @@ class UserDashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/user/updateToData', name: 'app_user_update', methods: ['POST', 'PUT'])]
+    #[Route('/user/updateToData', name: 'app_user_update', methods: ['POST'])]
     public function updateData(Request $request): Response
     {
+        // return $this->render('home/debugger.html.twig');
         $user = $this->getUser();
-        return $this->render('home/debugger.html.twig');
         if (!$user instanceof User) {
             throw $this->createNotFoundException('User not found');
         }
         // if ($request->get('_method') === 'POST')
         // {
-        $user->setName($request->request->get('name'));
-        $user->setEmail($request->request->get('email'));
-        $user->setPhoneNumber($request->request->get('phoneNumber'));
-        $user->setCompany($request->request->get('company'));
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
+            $user->setName($request->request->get('name'));
+            $user->setEmail($request->request->get('email'));
+            $user->setUsername($request->request->get('username'));
+            $user->setPhoneNumber($request->request->get('phoneNumber'));
+            
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+            
+        // dd('HOLA');
         return $this->redirectToRoute('app_user_dashboard');
         // } 
         // else
@@ -67,6 +68,7 @@ class UserDashboardController extends AbstractController
             throw $this->createNotFoundException('User not found');
         }
         $id = $user->getId();
+        
         return $this->render('user/updateData.html.twig', [
             'controller_name' => 'UserupdateDataController',
             'id' => $id,

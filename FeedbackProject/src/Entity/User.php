@@ -34,13 +34,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $phoneNumber = null;
 
     
-    public function __construct()
-    {
-        $this->date = new \DateTimeImmutable();
-    }
+    // public function __construct()
+    // {
+    //     $this->date = new \DateTimeImmutable();
+    // }
 
-    #[ORM\Column(type: "datetime_immutable")]
-    private ?\DateTimeImmutable $date = $this->date;
+    // #[ORM\Column(type: "datetime_immutable")]
+    // private \DateTimeImmutable $date = $this->date;
     
     public function getId(): ?int
     {
@@ -136,15 +136,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDate(): ?\DateTimeImmutable
-    {
-        return $this->date;
-    }
+    // public function getDate(): ?\DateTimeImmutable
+    // {
+    //     return $this->date;
+    // }
 
-    public function setDate(?\DateTimeImmutable $date): static
-    {
-        $this->date = $date;
+    // public function setDate(?\DateTimeImmutable $date): static
+    // {
+    //     $this->date = $date;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

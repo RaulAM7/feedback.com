@@ -27,7 +27,8 @@ class Project
 
     #[ORM\Column(nullable: true)]
     private ?bool $is_active = true;
-    #
+    
+
     #[ORM\ManyToOne(targetEntity: User::class,
      inversedBy: 'projectsOwned')]
     #[ORM\JoinColumn(name: 'project_owner_id', 
@@ -35,11 +36,11 @@ class Project
     nullable: false)]
     private $owner;
 
+
     #[ORM\OneToMany(targetEntity: Post::class,
     mappedBy: 'project')]
 
     private Collection $posts;
-
     public function __construct()
     {
         $this->posts = new ArrayCollection();

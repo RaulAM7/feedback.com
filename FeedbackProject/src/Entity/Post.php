@@ -44,6 +44,14 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     private ?Project $project = null;
 
+
+    #[ORM\ManyToOne(
+        targetEntity: User::class,
+        inversedBy: 'postsIncluded'
+    )]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     // Método que define las opciones disponibles para el formulario -> Que es la unica manera de definirlo
     // QUE NO SEA ACTIVANDO EL SETTER A MANIJA
     public static function getTypeChoices(): array
@@ -120,6 +128,15 @@ class Post
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+        return $this;
+    }
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
         return $this;
     }
 }

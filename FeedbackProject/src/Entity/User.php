@@ -45,15 +45,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     mappedBy: 'owner')]
     private $projectsOwned;
 
+    #[ORM\OneToMany(
+        targetEntity: Post::class,
+        mappedBy: 'author'
+    )]
+    private Collection $postsIncluded;
+
     public function __construct()
     {
         $this->projectsOwned = new ArrayCollection();
+        $this->postsIncluded = new ArrayCollection();
+
     }
 
     public function getProjectsOwned()
     {
         return $this->projectsOwned;
-
     }
 
     public function addProject(Project $project): void
@@ -201,4 +208,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     //     return $this;
     // }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->postsIncluded;
+    }
+    public function addPost(Post $post): self
+    {
+        if (!$this->postsIncluded->contains($post))
+        {
+            $this->postsIncluded[] = $post;
+            $post->setAuthor($this);
+        }
+        return $this;
+    }
+    public function removePost(Post $post): self
+    {
+        if ($this->postsIncluded->removeElement($post))
+        {
+            if ($post->getAuthor() === $this)
+            {
+                $post->setAuthor(null);
+            }
+        }
+        return $this;
+    }
 }

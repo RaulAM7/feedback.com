@@ -34,7 +34,6 @@ class UserDashboardController extends AbstractController
     #[Route('/user/updateToData', name: 'app_user_update', methods: ['POST'])]
     public function updateData(Request $request): Response
     {
-        // return $this->render('home/debugger.html.twig');
         $user = $this->getUser();
         if (!$user instanceof User) {
             throw $this->createNotFoundException('User not found');
@@ -49,7 +48,6 @@ class UserDashboardController extends AbstractController
             $this->entityManager->persist($user);
             $this->entityManager->flush();
             
-        // dd('HOLA');
         return $this->redirectToRoute('app_user_dashboard');
         // } 
         // else

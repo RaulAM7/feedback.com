@@ -64,4 +64,86 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function createUserBasic ($username, $email, $password) 
+    {
+        $user = new User();
+        $user->setUsername($username);
+        $user->setEmail($email);
+        $user->setPassword($password);
+        $user->setRoles(['ROLE_USER']);
+
+        $this->saveChanges($user);
+    }
+    public function saveChanges (User $user, bool $flush = true): void
+    {
+        $this->getEntityManager()->persist($user);
+        if ($flush) 
+        {
+            $this->getEntityManager()->flush();
+        }
+    }
+    public function getUserDataARR(User $user): array
+    {
+        return [
+            'id'=> $user->getId(),
+            'username'=> $user->getUsername(),
+            'email'=> $user->getEmail(),
+            'name'=> $user->getName(),
+            'phoneNumber' => $user->getPhoneNumber(),
+        ];
+    }
+
+
+    public function getUserSDataFlexible(User $users, array $fields = null): array
+    {
+        if ($fields === null) 
+        {
+            $fields = ['id', 'username', 'emai', 'name', 'phoneNumber'];
+        }
+        if ($users instanceof User)
+        {
+            $users = [$users];
+        }
+        $result = [];
+        foreach ($users as $user)
+        {
+            $userData = [];
+            foreach ($fields as $field)
+            {
+                $getter = 'get'. ucfirst($field);
+                if (method_exists($user, $getter))
+                {
+                    $userData[$field] = $user->$getter();
+                }
+            }
+            $result[] = $userData;
+        }
+        return ($users instanceof User) ? $result[0] : $result;
+    }
+
+    public function removeUser (User $user, bool $flush = true): void
+    {
+        $this->getEntityManager()->remove($user);
+        if ($flush)
+        {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function findByemail(string $email): ?User
+    {
+        return $this->createQueryBuilder('u')
+        ->where('u.email = :email')
+        ->setParameter('email', $email)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
+    public function findByRole(string $roles): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles = :r')
+            ->setParameter('email', $roles)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

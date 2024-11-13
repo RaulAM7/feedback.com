@@ -25,7 +25,7 @@ class Project
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $is_active = null;
+    private ?bool $is_active = true;
 
     public function getId(): ?int
     {

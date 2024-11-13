@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -38,7 +40,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $phoneNumber = null;
 
-    
+
+    #[ORM\OneToMany(targetEntity: Project::class, 
+    mappedBy: 'owner')]
+    private $projectsOwned;
+
+    public function __construct()
+    {
+        $this->projectsOwned = new ArrayCollection();
+    }
+
+    public function getProjectsOwned()
+    {
+        return $this->projectsOwned;
+
+    }
+
+    public function addProject(Project $project): void
+    {
+        if (!$this->projectsOwned->contains($project)) 
+        {
+            $this->projectsOwned[] = $project;
+            $project->setOwner($this);
+        }
+    }
+
+    public function removeProject(Project $project)
+    {
+        if ($this->projectsOwned->removeElement($project))
+        {
+            if ($project->getOwner() === $this)
+            {
+                $project->setOwner(null);
+            }
+        }
+        return $this;
+    }
+
     // public function __construct()
     // {
     //     $this->date = new \DateTimeImmutable();

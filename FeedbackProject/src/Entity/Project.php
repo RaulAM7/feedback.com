@@ -26,7 +26,24 @@ class Project
 
     #[ORM\Column(nullable: true)]
     private ?bool $is_active = true;
+    #
+    #[ORM\ManyToOne(targetEntity: User::class,
+     inversedBy: 'projectsOwned')]
+    #[ORM\JoinColumn(name: 'project_owner_id', 
+    referencedColumnName: 'id',
+    nullable: false)]
+    private $owner;
 
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+        return $this;
+    }
     public function getId(): ?int
     {
         return $this->id;

@@ -39,6 +39,11 @@ class Post
     #[ORM\Column(type: 'string', length: 20)]
     private ?string $status = null;
 
+    #[ORM\ManyToOne(targetEntity: Project::class, 
+    inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Project $project = null;
+
     // Método que define las opciones disponibles para el formulario -> Que es la unica manera de definirlo
     // QUE NO SEA ACTIVANDO EL SETTER A MANIJA
     public static function getTypeChoices(): array
@@ -106,6 +111,15 @@ class Post
     {
         $this->description = $description;
 
+        return $this;
+    }
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
         return $this;
     }
 }

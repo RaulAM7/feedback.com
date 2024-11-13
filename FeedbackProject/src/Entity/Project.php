@@ -4,8 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\UX\Turbo\Attribute\Broadcast;
-
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[Broadcast]
 class Project
@@ -34,6 +35,16 @@ class Project
     nullable: false)]
     private $owner;
 
+    #[ORM\OneToMany(targetEntity: Post::class,
+    mappedBy: 'project')]
+
+    private Collection $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
+
     public function getOwner(): ?User
     {
         return $this->owner;
@@ -44,6 +55,8 @@ class Project
         $this->owner = $owner;
         return $this;
     }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -94,6 +107,34 @@ class Project
     {
         $this->is_active = $is_active;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts():Collection
+    {
+        return $this->posts;
+    }
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($this)) 
+        {
+            $this->posts[] = $this;
+            $post->setProject($this);
+        }
+        return  $this;
+    }
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->removeElement($post))
+        {
+            if ($post->getProject() === $this)
+            {
+                $post->setProject(null);
+            }
+        }
         return $this;
     }
 }

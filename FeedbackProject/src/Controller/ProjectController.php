@@ -48,11 +48,24 @@ class ProjectController extends AbstractController
             
             $entityManager->persist($project);
             $entityManager->flush();
+
+
+            return $this->redirectToRoute(
+                'app_project_sucess'
+            );
         }
         return $this->render('project/projectCreate.html.twig',
          parameters: [
             'projectCreateForm' => $form->createView(),
             'id' => $id
+        ]);
+    }
+
+    #[Route('/projectSucess', name: 'app_project_sucess')]
+    public function projectSucessShow(): Response
+    {
+        return $this->render('project/ProjectCreateSucess.html.twig', [
+            'controller_name' => 'ProjectController',
         ]);
     }
 }

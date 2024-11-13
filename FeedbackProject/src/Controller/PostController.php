@@ -65,10 +65,22 @@ class PostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
+            return $this->redirectToRoute(
+                'app_posts_sucess');
+
         }
         return $this->render('post/postCreate.html.twig', 
         parameters:[
             'postCreateForm'=> $form->createView()]);
 
     }
+    
+    #[Route('/postSucess', name: 'app_posts_sucess')]
+    public function postSucessShow(): Response
+    {
+        return $this->render('post/PostCreateSucess.html.twig', [
+            'controller_name' => 'ProjectController',
+        ]);
+    }
+    
 }

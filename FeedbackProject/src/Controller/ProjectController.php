@@ -29,7 +29,8 @@ class ProjectController extends AbstractController
 
     #[Route('/project/create', name: 'app_project_create')]
 
-    public function createProject(Request $request, EntityManagerInterface $entityManagerInterface): Response
+    public function createProject(Request $request,
+    EntityManagerInterface $entityManagerInterface): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -42,7 +43,9 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->entityManager;
+
             $project->setOwner($this->getUser());   
+            
             $entityManager->persist($project);
             $entityManager->flush();
         }

@@ -20,15 +20,15 @@ class PostCreateForm extends AbstractType
             ->add('type', ChoiceType::class, [  // 'type' debe coincidir con el nombre de la propiedad
                 'choices' => Post::getTypeChoices(),  // Las opciones disponibles
                 'multiple' => false,  // false = solo una opción seleccionable
-                'expanded' => true,   // true = radio buttons, false = dropdown
+                'expanded' => false,   // true = radio buttons, false = dropdown
                 'label' => 'Tipo',    // Etiqueta que verá el usuario
                 'required' => true,   // El campo es obligatorio
             ])
             ->add('status', ChoiceType::class,   [
                 'choices' => Post::getStatusChoices(),
-                'mutliple' => false,
-                'expanded' => true,
-                'label'=> 'Tipo',
+                'multiple' => false,
+                'expanded' => false,
+                'label'=> 'Status',
                 'required'=> true,
             ]);
     }

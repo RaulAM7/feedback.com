@@ -127,7 +127,7 @@ class Post
     }
     public function setProject(?Project $project): self
     {
-        $this->project = $project;
+        $this->project = $project; 
         return $this;
     }
     public function getAuthor(): ?User

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CREATE A POST
+{% endblock %}
+
+
+{% block body %}
+
+	<h1>CREATE A POST</h1>
+
+
+    {{ form_errors(postCreateForm) }}
+
+
+
+    {{ form_start(postCreateForm) }}
+        {{ form_row(postCreateForm.title) }}
+        {{ form_row(postCreateForm.description) }}
+        {{ form_row(postCreateForm.type) }}
+        {{ form_row(postCreateForm.status) }}
+
+
+	<button type="submit" class="btn">Create a Post!</button>
+	<button onclick="window.history.back()">COME BACK</button>
+
+    {{ form_end(postCreateForm) }}
+
+
+{% endblock %}
+

@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Project;
 use App\Form\ProjectCreateForm;
-
+use App\Entity\User;
 class ProjectController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
@@ -31,18 +31,25 @@ class ProjectController extends AbstractController
 
     public function createProject(Request $request, EntityManagerInterface $entityManagerInterface): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        $id = $user->getId();
+
         $project = new Project();
         $form = $this->createForm(ProjectCreateForm::class,
          $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->entityManager;
-            $em->persist($project);
-            $em->flush();
+            $entityManager = $this->entityManager;
+            $project->setOwner($this->getUser());   
+            $entityManager->persist($project);
+            $entityManager->flush();
         }
-        return $this->render('project/projectCreate.html.twig', parameters: [
+        return $this->render('project/projectCreate.html.twig',
+         parameters: [
             'projectCreateForm' => $form->createView(),
+            'id' => $id
         ]);
     }
 }

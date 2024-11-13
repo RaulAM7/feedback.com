@@ -35,6 +35,7 @@ class UserDashboardController extends AbstractController
     public function updateData(Request $request): Response
     {
         $user = $this->getUser();
+        $user->getRoles();
         if (!$user instanceof User) {
             throw $this->createNotFoundException('User not found');
         }

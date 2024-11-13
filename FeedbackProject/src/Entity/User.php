@@ -132,6 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @see UserInterface
+     * asdasdasd
      */
     public function getRoles(): array
     {

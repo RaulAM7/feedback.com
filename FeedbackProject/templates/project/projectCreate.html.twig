@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CREATE A PROJECT{% endblock %}
+
+
+{% block body %}
+
+<h1>CREATE A PROJECT</h1>
+
+
+{{ form_errors(projectCreateForm) }}
+
+
+{{ form_start(projectCreateForm) }}
+    {{ form_row(projectCreateForm.name) }}
+    {{ form_row(projectCreateForm.url) }}
+    {{ form_row(projectCreateForm.description) }}
+
+    <button type="submit" class="btn">Create a Project!</button>
+    <button onclick="window.history.back()">COME BACK</button>
+
+
+
+{{ form_end(projectCreateForm) }}
+
+{% endblock %}

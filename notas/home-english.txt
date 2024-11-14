@@ -1,0 +1,341 @@
+Ok, now we'll move on to designing an initial HOME Landing page mock-up
+
+Main Guidelines - What goals does the HOME Landing Page have to meet?
+
+The basic purpose of this Landing page is to show what feedback.com is all about. IT MUST COMMUNICATE feedback.com's VALUE PROPOSITION to any visitor. Answer the question "what's this feedback.com thing about?" to get "oh yeah? Is this what this thing is about? Sell me this thing please, I want to buy it."
+
+In addition, you will have to teach everyone the basic operation of implementing feedback.com, which is basically "creating a bridge between the digital creator and their users through a "feedback button." Each creator will be able to generate in feedback.com the html code of a label for a "feedback button" that, by simply copying and pasting into your web creation, will take all your users to your feedback.com profile board. It works similarly to how Google Fonts allows you to obtain fonts with just a button that generates a simple html code that each one pastes into their website.
+
+Connections - Where does the user go from here?
+The user will only be able to go from here to the login and register screen. Choose where to place these CTAs. I think that an appropriate layout will be a couple of buttons at the top and then a CTA at the end. But I allow you to choose the appropriate layout of these CTAs, inspired by the landing page that I am going to give you as a base inspiration.
+
+Style and design guidelines
+You will follow the style guidelines of the report that you made Before, I copied it here:
+1. UX and UI Report
+UX Principles and Strategies:
+The layout emphasizes ease of navigation with a clear hierarchical structure. Key actions like creating a new post, filtering by type, and navigating different boards are positioned prominently to guide users effectively.
+Visual hierarchy is established through the use of font size, color, and spacing. Headings like "Leave your bug reports, ideas and feedback here" grab attention first, while subsequent elements follow a natural visual flow down the page.
+The side panel on the right serves as a quick-access navigation tool, allowing users to switch between various panels or projects quickly. This approach supports a streamlined browsing experience for users who need to jump between different boards.
+UI Elements:
+The buttons like "Create new post," "Top," "New," and "Trending" are well-designed with clear labels and adequate spacing. They are styled with a prominent color, helping them stand out against the neutral background.
+The post listing section is organized with tags like "Planned," "Priority," and "Under Review," using different colors to indicate the status of each post, which helps users to quickly understand the content.
+The icons used alongside sections like "Nomads.com" and "Photo AI" enhance clarity, allowing users to associate posts with specific projects or categories.
+Interactions appear intuitive, with clearly clickable elements (like the post titles and upvote/downvote buttons), which likely offer visual feedback on hover or click.
+Recommendations for Improvement:
+Consider adding a tooltip or label on the upvote and downvote icons to clarify their functionality, especially for new users.
+It would be helpful to include a visual indicator (such as a highlight) on the currently selected panel in the side navigation to enhance the user's awareness of their location.
+Adding a subtle hover effect on the "Create new post" button could improve interactivity perception.
+2.CSS Styling Report
+Styling Elements:
+The page uses a clean and modern font, likely a sans-serif like "Nunito Sans," which aligns with contemporary web design trends and enhances readability.
+The color scheme includes a white background, with shades of red for alerts and important actions (e.g., the "Create new post" button and "Priority" tag), and softer shades of blue and gray for other tags and navigation elements.
+The font sizes vary between sections, with larger sizes for headings and slightly smaller fonts for post descriptions, contributing to the visual hierarchy.
+Borders and spacing are used subtly to separate sections without clutter, with light gray lines around different UI elements and adequate padding around buttons and text sections.
+Layout and CSS Frameworks:
+The design seems custom, but it borrows concepts from frameworks like Bootstrap, particularly in the grid-based layout and the responsive side panel.
+The spacing between posts and side panel items suggests a grid or flexbox layout is used, providing consistency and alignment throughout the page.
+Shadows or gradients are minimal, maintaining a flat design approach, which keeps the page looking clean and uncluttered.
+
+The concrete implementation of this should follow a style similar to this:
+
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="UTF-8">
+ <title>
+ {% block title %}💡Feedback.com💡
+ {% endblock %}
+ </title>
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em %22 font-size=%2296%22>⚫️</text></svg>">
+ {% block stylesheets %}
+ <style>
+ @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000 &display= swap');
+ body {
+ font-family: 'Nunito Sans', sans-serif;
+ background-color: #f5f5f5;
+ color: #333;
+ margin: 0;
+ padding: 0;
+ }
+ header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 20px;
+ background-color: #ffffff;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ position:relative;
+ }
+ .header-title {
+ font-size: 24px;
+ font-weight: bold;
+ }
+ .icon-buttons {
+ display: flex;
+ align-items: center;
+ gap: 20px;
+ }
+ .icon-button {
+ position:relative;
+ cursor: pointer;
+ background: none;
+ border: none;
+ font-size: 18px;
+ }
+ .dropdown {
+ display: none;
+ position: absolute;
+ top: 50px;
+ right: 0;
+ background-color: #fff;
+ border: 1px solid #ddd;
+ border-radius: 8px;
+ box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+ width: 250px;
+ z-index: 100;
+ }
+ .icon-button:hover .dropdown,
+ .icon-button:focus .dropdown {
+ display: block;
+ }
+ .dropdown h3 {
+ font-size: 16px;
+ padding: 10px;
+ margin: 0;
+ border-bottom: 1px solid #ddd;
+ }
+ .dropdown-content {
+ padding: 10px;
+ font-size: 14px;
+ }
+ .dropdown-content ul {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+ }
+ .dropdown-content ul li {
+ padding: 8px 0;
+ border-bottom: 1px solid #f0f0f0;
+ cursor: pointer;
+ }
+ .dropdown-content ul li:last-child {
+ border-bottom: none;
+ }
+ .dropdown-footer {
+ text-align: center;
+ padding: 10px;
+ font-size: 14px;
+ color: #666;
+ }
+ /* Rest of your existing styles */
+ .container {
+ display: flex;
+ max-width: 1200px;
+ margin: 0 self;
+ padding: 20px;
+ }
+ .main-content {
+ flex: 3;
+ margin-right: 20px;
+ }
+ .side-panel {
+ flex: 1;
+ background-color: #fff;
+ padding: 10px;
+ border-radius: 8px;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
+ .alert-box {
+ background-color: #e0f7fa;
+ border: 1px solid #b2dfdb;
+ color: #00796b;
+ padding: 15px;
+ border-radius: 5px;
+ margin-bottom: 20px;
+ text-align: center;
+ }
+ .filter-buttons button,
+ .create-post {
+ background-color: #2CD8D5;
+ color: #ffffff;
+ border: none;
+ padding: 10px 15px;
+ border-radius: 5px;
+ cursor: pointer;
+ margin-right: 5px;
+ }
+ .post {
+ background-color: #ffffff;
+ padding: 15px;
+ margin-bottom: 10px;
+ border-radius: 8px;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
+ .tag {
+ display: inline-block;
+ padding: 2px 8px;
+ border-radius: 4px;
+ font-size: 12px;
+ font-weight: bold;
+ margin-right: 5px;
+ }
+ .planned {
+ background-color: #e0f7fa;color: #00796b;
+ }
+ .priority {
+ background-color: #ffebee;
+ color: #c62828;
+ }
+ .review {
+ background-color: #fff3e0;
+ color: #ef6c00;
+ }
+ .panel-button {
+ display: block;
+ width: 100%;
+ text-align: left;
+ background-color: #ffffff;
+ color: #333;
+ border: 1px solid #ddd;
+ padding: 10px;
+ border-radius: 5px;
+ margin-bottom: 5px;
+ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+ cursor: pointer;
+ }
+ .panel-button:hover {
+ background-color: #f0f0f0;
+ }
+ </style>
+ {% endblock %}
+ {% block javascripts %}
+ {{ importmap() }}
+ {% endblock %}
+ </head>
+ <body>
+ {% block body %}
+ <header>
+ <div class="header-title">💡Feedback.com💡</div>
+ <div
+ class="icon-buttons">
+ <!-- Notification Button -->
+ <button class="icon-button">
+ 🔔
+ <div class="dropdown">
+ <h3>Inbox</h3>
+ <div class="dropdown-content">
+ <ul>
+ <li>All notifications</li>
+ <li>Comments in your posts</li>
+ <li>@Mentions</li>
+ <li>Your Notification list</li>
+ </ul>
+ </div>
+ <div class="dropdown-footer">You're all caught up!</div>
+ </div>
+ </button>
+ <!-- Profile Button -->
+ <button class="icon-button">
+ 🧑‍💻
+ <div class="dropdown">
+ <h3>Profile</h3>
+ <div class="dropdown-content">
+ <ul>
+ <li>My Profile</li>
+ <li>My Projects</li>
+ <li>Logout</li>
+ <li>✨ Build your own Feedback-Panel</li>
+ </ul>
+ </div>
+ </div>
+ </button>
+ </div>
+ </header>
+ <div class="container">
+ <div class="main-content">
+ <div class="alert-box">
+ Leave your bug reports, ideas, and feedback here. Please remember to LOGIN to do this.
+ </div>
+ <div class="filter-buttons">
+ <button>Best Posts 🔟</button>
+ <button>New Posts 🆕</button>
+ <button>Trendy🔥</button>
+ <button class="create-post">Create new post</button>
+ </div>
+ <div class="post">
+ <span class="tag planned">Planned</span>
+ <h3>Title 1</h3>
+ <p>
+ <strong>Project 1</strong>
+ | 14 days ago</p>
+ <p>Details of the post content...</p>
+ </div>
+ <div class="post">
+ <span class="tag priority">Priority</span>
+ <h3>Title 2</h3>
+ <p>
+ <strong>Project 2</strong>
+ | 15 days ago</p>
+ <p>Details of the post content...</p>
+ </div>
+ <div class="post">
+ <span class="tag priority">Priority</span>
+ <h3>Title 2</h3>
+ <p>
+ <strong>Project 2</strong>
+ | 15 days ago</p>
+ <p>Details of the post content...</p>
+ </div>
+ <div class="post">
+ <span class="tag priority">Priority</span>
+ <h3>Title 2</h3>
+ <p>
+ <strong>Project 2</strong>
+ | 15 days ago</p>
+ <p>Details of the post content...</p>
+ </div>
+ <div class="post">
+ <span class="tag priority">Priority</span>
+ <h3>Title 2</h3>
+ <p>
+ <strong>Project 2</strong>
+ | 15 days ago</p>
+ <p>Details of the post contentt...</p>
+ </div>
+ <div class="post">
+ <span class="tag priority">Priority</span>
+ <h3>Title 2</h3>
+ <p>
+ <strong>Project 2</strong>
+ | 15 days ago</p>
+ <p>Details of the post content...</p>
+ </div>
+ </div>
+ <div class="side-panel">
+ <h3>Panels</h3>
+ <button class="panel-button">View all posts</button>
+ <button class="panel-button">Project 1</button>
+ <button class="panel-button">Project 1</button>
+ <button class="panel-button">Project 1</button>
+ <button class="panel-button">Project 1</button>
+ <button class="panel-button">Project 1</button>
+ <button class="panel-button">Project 1</button>
+ <button class="panel-button">Project 1</button>
+ <button class="panel-button">Project 1</button>
+<button class="panel-button">Project 1</button>
+<button class="panel-button">Other Links</button>
+<button class="panel-button">Direct Feedback for @creator</button>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>
+
+Inspiration - Landing Page Layout Structure
+Following the style of the previous one, you will take inspiration for the design of the layout and structure of a good landing page from this one:
+
+https://demo.themesberg.com/landwind/
+
+I also give you the screenshots that I attached. This landing page will help you get inspiration for the structure of a landing page, But it doesn't mean you have to implement every block, I'll leave that to your expert discretion.
+
+Generate the HTML code needed to have a first Mock-up of my HOME Landing Page with my style guide and with a structure similar to the structure inspiration.

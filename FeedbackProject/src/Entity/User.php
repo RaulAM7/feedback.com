@@ -41,8 +41,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $phoneNumber = null;
 
 
-    #[ORM\OneToMany(targetEntity: Project::class, 
-    mappedBy: 'owner')]
+    #[ORM\OneToMany(
+        targetEntity: Project::class, 
+        mappedBy: 'owner')]
     private $projectsOwned;
 
     #[ORM\OneToMany(

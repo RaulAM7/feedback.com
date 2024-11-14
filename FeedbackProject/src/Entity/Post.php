@@ -31,8 +31,6 @@ class Post
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-
-    // Define el campo TYPE en la base de datos
     #[ORM\Column(type: 'string', length:20)]
     private ?string $type = null;
 
@@ -43,7 +41,6 @@ class Post
     inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Project $project = null;
-
 
     #[ORM\ManyToOne(
         targetEntity: User::class,
@@ -77,7 +74,6 @@ class Post
     {
         return $this->type;
     }
-
     public function getStatus(): string
     {
         return $this->status;
@@ -86,7 +82,7 @@ class Post
     public function setType(?string $type): self
     {
         $this->type = $type;
-        return $this; // Permite encadenar metodos
+        return $this; // Permite encadenar metodos retornando la propia instancia
     }
     public function setStatus(?string $status): self
     {
@@ -106,7 +102,6 @@ class Post
     public function setTitle(?string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 

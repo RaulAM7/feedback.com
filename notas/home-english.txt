@@ -342,10 +342,6 @@ Generate the HTML code needed to have a first Mock-up of my HOME Landing Page wi
 
 
 
-
-
-
-
 Well, I liked the initial HOME Landing page mockup, I want you to add a new information block that tries to explain and easily sell the "Feedback Button".
 You have to sell it as a plug & play gadget hook that can be easily implemented in the digital product of a digital creator.
 With just one button you can generate your "Feedback Button" to place on your digital product and automatically build a "bridge" between your users/customers/audience and your "feedback centralization board".

@@ -1,7 +1,83 @@
+Bien, por ahora me vale el diseño preliminar de HOME Landing page. Lo retocaremos pero por ahora no.
+Ahora quiero que generes el de la pagina de UPDATE USER DATA page.
+
+
+Por ahora será un placeholder, solo quiero que le des un estilado con mis Guidelines de Styling para Feedback.com a esta página
+
+
+Okay, so for now the preliminary design of the HOME Landing page is fine. We'll tweak it, but not for now.
+Now I want you to generate the UPDATE USER DATA page.
+
+For now it will be a placeholder, I just want you to style it with my Feedback.com Styling Guidelines for this page.
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Update Your Data - Feedback.com
+{% block title %}Hello DashboardController!
 {% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	{% if app.user %}
+		<div class="mb-3">
+			You are logged in as
+			{{ app.user.userIdentifier }},
+			<a href="{{ path('app_logout') }}">Logout</a>
+		</div>
+	{% endif %}
+
+	<div class="example-wrapper">
+		<h1>This is UPDATE DATA:✅</h1>
+	</div>
+
+	<form method="POST" , action="{{ path('app_user_update') }}">
+
+
+		<input type="hidden" name="_method" value="PUT">
+
+		<div>
+			<label for="name">Update your name:</label>
+			<input type="text" id="name" name="name" required>
+		</div>
+
+		<div>
+			<label for="email">Update your Email:</label>
+			<input type="text" id="email" name="email" required>
+		</div>
+		<div>
+			<label for="username">Update your username:</label>
+			<input type="text" id="username" name="username" required>
+		</div>
+        
+		<div>
+			<label for="phoneNumber">Update your Phone:</label>
+			<input type="text" id="phoneNumber" name="phoneNumber" required>
+		</div>
+
+		<button type="submit">Update your Data!</button>
+
+	</form>
+
+
+{% endblock %}
+
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Your Data - Feedback.com{% endblock %}
 
 {% block body %}
 	<style>
@@ -94,8 +170,7 @@
 	<div class="container">
 		{% if app.user %}
 			<div class="info">
-				You are logged in as
-				{{ app.user.userIdentifier }}.
+				You are logged in as {{ app.user.userIdentifier }}.
 				<a href="{{ path('app_logout') }}">Logout</a>
 			</div>
 		{% endif %}

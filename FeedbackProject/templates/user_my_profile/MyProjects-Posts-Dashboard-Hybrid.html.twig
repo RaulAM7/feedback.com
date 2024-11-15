@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Projects Posts Dashboard
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="title">My Projects Posts Dashboard</h1>
+
+		<div class="filters">
+			<select>
+				<option value="">Filter by Project</option>
+				{% for project in projects %}
+					<option value="{{ project.id }}">{{ project.name }}</option>
+				{% endfor %}
+			</select>
+
+			<select>
+				<option value="">Filter by Type</option>
+				<option value="bug">Bug</option>
+				<option value="idea">Idea</option>
+				<option value="other">Other</option>
+			</select>
+
+			<select>
+				<option value="">Filter by Status</option>
+				<option value="not_reviewed">Not Reviewed</option>
+				<option value="in_revision">In Revision</option>
+				<option value="processed">Processed</option>
+				<option value="descarted">Descarted</option>
+			</select>
+		</div>
+
+		<div class="card-grid">
+			{% for post in posts %}
+				<div class="post-card">
+					<h3>{{ post.title }}</h3>
+					<p>{{ post.description }}</p>
+					<div class="post-details">
+						<span>
+							<strong>Type:</strong>
+							{{ post.type }}</span>
+						<span>
+							<strong>Status:</strong>
+							{{ post.status }}</span>
+						<span>
+							<strong>Project:</strong>
+							{{ post.project.name }}</span>
+						<span>
+							<strong>Author:</strong>
+							{{ post.author.username }}</span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<style>
+		.container {
+			max-width: 1200px;
+			margin: 20px auto;
+			padding: 20px;
+		}
+		.title {
+			text-align: center;
+			font-size: 28px;
+			margin-bottom: 20px;
+			color: #333;
+		}
+		.filters {
+			display: flex;
+			gap: 15px;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+		.card-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+			gap: 20px;
+		}
+		.post-card {
+			background-color: #fff;
+			padding: 15px;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+		.post-card h3 {
+			font-size: 18px;
+			color: #2CD8D5;
+			margin-bottom: 10px;
+		}
+		.post-details span {
+			display: block;
+			font-size: 14px;
+			color: #666;
+		}
+	</style>
+{% endblock %}
+

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Projects Posts Dashboard
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="title">My Projects Dashboard</h1>
+
+		<div class="card-grid">
+			{% for post in posts %}
+				<div class="post-card">
+					<h3>{{ post.title }}</h3>
+					<p>{{ post.description }}</p>
+					<div class="post-details">
+						<span>
+							<strong>Type:</strong>
+							{{ post.type }}</span>
+						<span>
+							<strong>Status:</strong>
+							{{ post.status }}</span>
+						<span>
+							<strong>Project:</strong>
+							{{ post.project.name }}</span>
+						<span>
+							<strong>Author:</strong>
+							{{ post.author.username }}</span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<style>
+		.container {
+			max-width: 1200px;
+			margin: 20px auto;
+			padding: 20px;
+		}
+		.title {
+			text-align: center;
+			font-size: 28px;
+			margin-bottom: 20px;
+			color: #333;
+		}
+		.card-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+			gap: 20px;
+		}
+		.post-card {
+			background-color: #fff;
+			padding: 15px;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+		.post-card h3 {
+			font-size: 18px;
+			color: #2CD8D5;
+			margin-bottom: 10px;
+		}
+		.post-details span {
+			display: block;
+			font-size: 14px;
+			color: #666;
+		}
+	</style>
+{% endblock %}

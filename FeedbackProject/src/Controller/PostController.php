@@ -33,9 +33,9 @@ class PostController extends AbstractController
     #[Route('/posts_create/{projectId}',
      name: 'app_posts_create')]
     public function createPost(int $projectId,
-    Request $request,
-    EntityManagerInterface $entityManager
-    ): Response
+                                            Request $request,
+                                            EntityManagerInterface $entityManager
+                                            ): Response
     {
         /** @var User $user */
         $user = $this->getUser();

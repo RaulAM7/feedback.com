@@ -1,8 +1,0 @@
-Bien, por ahora me vale el diseño preliminar de LOGIN page. Lo retocaremos pero por ahora no.
-
-Ahora quiero que generes el de la pagina de REGISTER page.
-
-
-Okay, so for now the preliminary LOGIN page design is fine. We'll tweak it, but not for now.
-
-Now I want you to generate the REGISTER page.

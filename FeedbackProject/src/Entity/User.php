@@ -73,13 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         {
             $this->projectsOwned[] = $project;
             $project->setOwner($this);
-
-            if (! $this->isCreator){
-                $this->isCreator = true;
-            }
         }
-
-
     }
 
     public function removeProject(Project $project)

@@ -46,7 +46,7 @@ class FindCreatorsController extends AbstractController
         $creators = $this->userRepository
         ->findBy(['isCreator' => true]);
         
-        return $this->render('find_creators_accordion.html.twig', [
+        return $this->render('find_creators/find_creators_accordion.html.twig', [
             'creators' => $creators,
         ]);
     }

@@ -61,12 +61,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->postsIncluded = new ArrayCollection();
 
     }
-
     public function getProjectsOwned()
     {
         return $this->projectsOwned;
     }
-
     public function addProject(Project $project): void
     {
         if (!$this->projectsOwned->contains($project)) 
@@ -75,7 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $project->setOwner($this);
         }
     }
-
     public function removeProject(Project $project)
     {
         if ($this->projectsOwned->removeElement($project))

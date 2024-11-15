@@ -1,0 +1,246 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Find Creators - Feedback.com
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700 &display=swap');
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .header-buttons a {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #2CD8D5;
+            color: #ffffff;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+
+        .header-buttons a:hover {
+            background-color: #28b5b3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .filter-select,
+        .filter-button {
+            background-color: #ffffff;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .filter-button {
+            background-color: #2CD8D5;
+            font-weight: bold;
+            border: none;
+            transition: background-color 0.3s;
+            color: #ffffff;
+        }
+
+        .filter-button:hover {
+            background-color: #28b5b3;
+        }
+
+        .project-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-table th,
+        .project-table td {
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .project-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .project-table td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-in-review {
+            background-color: #FF6F61;
+            color: #ffffff;
+        }
+
+        .status-planned {
+            background-color: #2CD8D5;
+            color: #ffffff;
+        }
+
+        .status-active {
+            background-color: #FFC107;
+            color: #333;
+        }
+
+        .status-done {
+            background-color: #4CAF50;
+            color: #ffffff;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <header>
+        <div class="header-title">💡Feedback.com💡 - My Projects Dashboard</div>
+        <div class="header-buttons">
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="title">My Projects Dashboard</h1>
+
+        <div class="filters">
+            <select class="filter-select">
+                <option value="">Filter by Project</option>
+                <option value="project1">Project 1</option>
+                <option value="project2">Project 2</option>
+            </select>
+
+            <select class="filter-select">
+                <option value="">Filter by Type</option>
+                <option value="feature-request">Feature Request</option>
+                <option value="bug-report">Bug Report</option>
+            </select>
+
+            <select class="filter-select">
+                <option value="">Filter by Status</option>
+                <option value="planned">Planned</option>
+                <option value="in-review">In Review</option>
+                <option value="active">Active</option>
+                <option value="done">Done</option>
+            </select>
+
+            <button class="filter-button">Apply Filters</button>
+        </div>
+
+        <table class="project-table">
+            <thead>
+                <tr>
+                    <th>Upvotes</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Comments</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>137</td>
+                    <td>Upvote threshold for forward...</td>
+                    <td>Feature Request</td>
+                    <td>
+                        <span class="status-badge status-in-review">In Review</span>
+                    </td>
+                    <td>4</td>
+                    <td>19 Jul</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>Better Experience for Multi...</td>
+                    <td>Feature Request</td>
+                    <td>
+                        <span class="status-badge status-planned">Planned</span>
+                    </td>
+                    <td>5</td>
+                    <td>17 Jan</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>AI Comment summarization</td>
+                    <td>Feature Request</td>
+                    <td>
+                        <span class="status-badge status-planned">Planned</span>
+                    </td>
+                    <td>1</td>
+                    <td>11 May</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Webhook support</td>
+                    <td>Bug Report</td>
+                    <td>
+                        <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td>3</td>
+                    <td>6 Aug</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}

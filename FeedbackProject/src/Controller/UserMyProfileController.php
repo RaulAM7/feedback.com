@@ -14,6 +14,7 @@ use App\Entity\Post;
 
 class UserMyProfileController extends AbstractController
 {
+    private $entityManager;
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;

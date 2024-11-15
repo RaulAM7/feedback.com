@@ -3,42 +3,7 @@
 {% block title %}My Projects Posts Dashboard
 {% endblock %}
 
-{% block body %}
-	<div class="container">
-		<h1 class="title">My Projects Dashboard</h1>
-
-		<ul class="post-list">
-			{% for post in posts %}
-				<li class="post-item">
-					<div class="post-summary" onclick="toggleDetails({{ post.id }})">
-						<h3>{{ post.title }}</h3>
-						<span>
-							<strong>Type:</strong>
-							{{ post.type }}</span>
-						<span>
-							<strong>Status:</strong>
-							{{ post.status }}</span>
-						<span>
-							<strong>Project:</strong>
-							{{ post.project.name }}</span>
-					</div>
-					<div id="details-{{ post.id }}" class="post-details">
-						<p>{{ post.description }}</p>
-						<span>
-							<strong>Author:</strong>
-							{{ post.author.username }}</span>
-					</div>
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
-
-<script>
-            function toggleDetails(id) {
-    const details = document.getElementById('details-' + id);
-    details.classList.toggle('visible');
-    }
-</script>
+{% block stylesheets %}
 
 	<style>
 		.container {
@@ -79,5 +44,47 @@
 			display: block;
 		}
 	</style>
+
+{% endblock %}
+
+
+{% block body %}
+	<div class="container">
+		<h1 class="title">My Projects Dashboard</h1>
+
+		<ul class="post-list">
+			{% for post in posts %}
+				<li class="post-item">
+					<div class="post-summary" onclick="toggleDetails({{ post.id }})">
+						<h3>{{ post.title }}</h3>
+						<span>
+							<strong>Type:</strong>
+							{{ post.type }}</span>
+						<span>
+							<strong>Status:</strong>
+							{{ post.status }}</span>
+						<span>
+							<strong>Project:</strong>
+							{{ post.project.name }}</span>
+					</div>
+					<div id="details-{{ post.id }}" class="post-details">
+						<p>{{ post.description }}</p>
+						<span>
+							<strong>Author:</strong>
+							{{ post.author.username }}</span>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+<script>
+            function toggleDetails(id) {
+    const details = document.getElementById('details-' + id);
+    details.classList.toggle('visible');
+    }
+</script>
+
+
 {% endblock %}
 

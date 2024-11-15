@@ -40,16 +40,26 @@ class UserMyProfileController extends AbstractController
     #[Route('/user/my-projects-test-card', name: 'app_user_my_projects-test-card')]
     public function showCard(EntityManagerInterface $entityManager): Response
     {
-        
+
         /** @var User $user */
         $user = $this->getUser();
-        $id = $user->getId();
 
-        $posts = $user->getPosts();
+        // $projects = $user->getProjectsOwned()->toArray();
+        // dd($projects);
+
+        $projects = $user->getProjectsOwned();
+
+        $allPostsOfAllProjectsOfUser = [];
+
+        foreach ($projects as $project) {
+            foreach ($project->getPosts() as $post) {
+                $allPostsOfAllProjectsOfUser[] = $post;
+            }
+        }
 
         return $this->render('user_my_profile/MyProjects-Posts-Dashboard-Card.html.twig',
          [
-            'posts'=> $posts,
+            'posts'=> $allPostsOfAllProjectsOfUser,
             'controller_name' => 'UserMyProfileController',
         ]);
     }
@@ -60,17 +70,25 @@ class UserMyProfileController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        $id = $user->getId();
 
-        $posts = $user->getPosts();
+        // $projects = $user->getProjectsOwned()->toArray();
+        // dd($projects);
 
         $projects = $user->getProjectsOwned();
+
+        $allPostsOfAllProjectsOfUser = [];
+
+        foreach ($projects as $project) {
+            foreach ($project->getPosts() as $post) {
+                $allPostsOfAllProjectsOfUser[] = $post;
+            }
+        }
 
 
         return $this->render(
             'user_my_profile/MyProjects-Posts-Dashboard-Hybrid.html.twig',
             [
-                'posts' => $posts,
+                'posts' => $allPostsOfAllProjectsOfUser,
                 'projects' => $projects,
                 'controller_name' => 'UserMyProfileController',
             ]

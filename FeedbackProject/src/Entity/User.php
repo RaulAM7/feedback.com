@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,6 +41,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $phoneNumber = null;
 
+    #[ORM\Column]
+    private ?bool $isCreator = false;
 
     #[ORM\OneToMany(
         targetEntity: Project::class, 
@@ -71,6 +74,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->projectsOwned[] = $project;
             $project->setOwner($this);
         }
+
+
     }
 
     public function removeProject(Project $project)
@@ -238,4 +243,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
         return $this;
     }
-}
+
+    public function getIsCreator (): bool
+    {
+        return $this->isCreator;
+    }
+
+    public function setIsCreator (bool $isCreator): self
+    {
+        $this->isCreator = $isCreator;
+        return $this;
+    }
+
+}   

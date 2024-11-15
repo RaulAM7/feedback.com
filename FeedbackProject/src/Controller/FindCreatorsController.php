@@ -16,15 +16,15 @@ class FindCreatorsController extends AbstractController
         $this->userRepository = $userRepository;
     }
 
-    #[Route('/find-creators-grid', name: 'app_find-creators-grid')]    
-    public function findCreatorsGrid(): Response
+    #[Route('/find-creators-card', name: 'app_find-creators-card')]    
+    public function findCreatorsCard(): Response
     {
         $creators = $this->userRepository
         ->findBy(['isCreator' => true]);
         
         // dd($creators);
 
-        return $this->render('find_creators_grid.html.twig', [
+        return $this->render('find_creators/find_creators_card.html.twig', [
             'creators' => $creators,
         ]);
     }

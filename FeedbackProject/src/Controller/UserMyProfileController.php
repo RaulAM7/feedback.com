@@ -85,16 +85,25 @@ class UserMyProfileController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        // $projects = $user->getProjectsOwned()->toArray();
+        // dd($projects);
+
         $projects = $user->getProjectsOwned();
 
-        dd($projects);
-        
-        $posts = $projects->getPosts();
+        $allPostsOfAllProjectsOfUser = [];
 
+        foreach ($projects as $project) 
+        {
+            foreach ($project->getPosts() as $post)
+            {
+                $allPostsOfAllProjectsOfUser[] = $post;
+            }
+        }
+        
         return $this->render(
             'user_my_profile/MyProjects-Posts-Dashboard-List.html.twig',
             [
-                'posts' => $posts,
+                'posts' => $allPostsOfAllProjectsOfUser,
                 'projects' => $projects,
                 'controller_name' => 'UserMyProfileController',
             ]

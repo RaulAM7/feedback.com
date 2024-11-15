@@ -75,4 +75,27 @@ class UserMyProfileController extends AbstractController
         );
     }
 
+
+    #[Route('/user/my-projects-test-list', name: 'app_user_my_projects-test-list')]
+    public function showList(EntityManagerInterface $entityManager): Response
+    {
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $id = $user->getId();
+
+        $posts = $user->getPosts();
+
+        $projects = $user->getProjectsOwned();
+
+        return $this->render(
+            'user_my_profile/MyProjects-Posts-Dashboard-List.html.twig',
+            [
+                'posts' => $posts,
+                'projects' => $projects,
+                'controller_name' => 'UserMyProfileController',
+            ]
+        );
+    }
+
 }

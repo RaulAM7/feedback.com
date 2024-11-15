@@ -54,7 +54,7 @@ class Project
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
-        return $this;
+        return $this;   
     }
 
     

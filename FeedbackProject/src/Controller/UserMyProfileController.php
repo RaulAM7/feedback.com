@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Entity\User;
 use App\Entity\Project;
 use App\Entity\Post;
@@ -83,11 +84,12 @@ class UserMyProfileController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        $id = $user->getId();
-
-        $posts = $user->getPosts();
 
         $projects = $user->getProjectsOwned();
+
+        dd($projects);
+        
+        $posts = $projects->getPosts();
 
         return $this->render(
             'user_my_profile/MyProjects-Posts-Dashboard-List.html.twig',
